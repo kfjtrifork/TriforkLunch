@@ -49,21 +49,19 @@ fun Week(viewModel: WeekViewModel = viewModel()) {
     val weeks by viewModel.weeksState.collectAsState()
     val weekNumber by viewModel.weekNumberState.collectAsState()
 
-    val columnCount = 2
     val rowCount = 5
 
-    Column(modifier = Modifier.width(300.dp)) {
+    Column(modifier = Modifier.width(500.dp)) {
         Text(text = "Week $weekNumber")
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Column {
+            Column(modifier = Modifier.width(100.dp)) {
                 Text(text = "Day")
             }
-            Column {
-                Text(text = LocationEnum.OFFICE.name)
-            }
-            Column {
-                Text(text = LocationEnum.HOME.name)
-            }
+            //LocationEnum.values().forEach {
+                Column(modifier = Modifier.width(100.dp)) {
+                    Text(text = "Localization")
+                }
+            //}
         }
         for (columnIndex in 1..rowCount) {
             Row(
@@ -71,20 +69,10 @@ fun Week(viewModel: WeekViewModel = viewModel()) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Column {
-                    Text(text = DayEnum.values()[columnIndex - 1].name)
-                }
-                for (rowIndex in 1..columnCount) {
-                    Column(modifier = Modifier.padding(10.dp)) {
-                        RadioButton(
-                            selected = isSelected(
-                                columnIndex,
-                                rowIndex,
-                                weekNumber,
-                                viewModel
-                            ),
-                            onClick = { updateUiDay(columnIndex, rowIndex, weekNumber, viewModel) })
-                        //Text("test")
+                Button(onClick = { /*TODO*/ }) {
+                    Row(modifier = Modifier.width(100.dp)) {
+                        Text(text = DayEnum.values()[columnIndex - 1].name)
+                        Text("test")
                     }
                 }
             }
